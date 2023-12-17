@@ -1,0 +1,72 @@
+<!-- public/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add Bootstrap CDN link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MkAOfVOKH8GaN9EknJyrX+ltTLeul6ROd5iQR2w5A8lH/bg3onug7iBEJ2jXFCVp" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Quiz</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="card question-form">
+      <div class="card-body">
+        <h2 class="card-title">Add a New Question</h2>
+        <form action="/save-question" method="post">
+          <div class="mb-3">
+            <label for="questionText" class="form-label">Question:</label>
+            <input type="text" class="form-control" id="questionText" name="questionText" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="optionA" class="form-label">Option A:</label>
+            <input type="text" class="form-control" id="optionA" name="optionA" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="optionB" class="form-label">Option B:</label>
+            <input type="text" class="form-control" id="optionB" name="optionB" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="optionC" class="form-label">Option C:</label>
+            <input type="text" class="form-control" id="optionC" name="optionC" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="level" class="form-label">Level (integer):</label>
+            <input type="number" class="form-control" id="level" name="level" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="correctOption" class="form-label">Correct Option (A, B, or C):</label>
+            <input type="text" class="form-control" id="correctOption" name="correctOption" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save Question</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Custom Alert -->
+    <div class="alert alert-success mt-3" role="alert" style="display: none;">
+      Question saved successfully!
+    </div>
+  </div>
+
+  <!-- Add Bootstrap JS and Popper.js for Bootstrap features -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-huK5P6O58QSG+6EL0Pu3kYPzG5k9vWpZr00yS7Fnu1dWEqTxl7ezvc4HE2s6L4N2" crossorigin="anonymous"></script>
+  <script>
+    // Show the custom alert after saving the question
+    const alertElement = document.querySelector('.alert');
+    alertElement.style.display = 'block';
+    setTimeout(() => {
+      alertElement.style.display = 'none';
+    }, 3000); // Hide the alert after 3 seconds
+  </script>
+</body>
+</html>
+

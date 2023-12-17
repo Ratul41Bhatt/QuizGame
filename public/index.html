@@ -1,0 +1,125 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+    <title>Start</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Welcome to the Quiz</h1>
+
+        <div class="row mt-4">
+            <button class="btn btn-card btn-primary" onclick="openPlayQuizModal()">Play Quiz</button>
+            <button class="btn btn-card btn-secondary" id="setQuestionBtn">Set Question</button>
+        </div>
+    </div>
+
+    <!-- index.html -->
+
+    <!-- ... (previous code) -->
+
+    <!-- Set Question Modal -->
+    <div class="modal" id="setQuestionModal" style="display: none;">
+        <div class="modal-dialog card">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enter PIN to Set Questions</h5>
+                    <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="pinInput" class="form-label">PIN:</label>
+                    <input type="password" class="form-control" id="pinInput">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()"
+                    style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer;"
+                    >Close</button>
+                    <button type="button" class="btn btn-primary" onclick="checkPin()"
+                    style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="playQuizModal" style="display: none;">
+        <div class="modal-dialog card">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to Play Quiz</h5>
+                    <button type="button" class="btn-close" onclick="closePlayQuizModal()" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="nameInput" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="nameInput" name="name" required>
+
+                    <label for="phoneInput" class="form-label">Phone Number:</label>
+                    <input type="text" class="form-control" id="phoneInput" name="phone" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closePlayQuizModal()"
+                        style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer;">Close
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="loginAndPlay()"
+                        style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer;">Play
+                        Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ... (remaining code) -->
+
+    <script src="styles.js"></script>
+    <script>
+      function openPlayQuizModal() {
+          document.getElementById('playQuizModal').style.display = 'block';
+      }
+  
+      function closePlayQuizModal() {
+          document.getElementById('playQuizModal').style.display = 'none';
+      }
+  
+      async function loginAndPlay() {
+        const name = document.getElementById('nameInput').value;
+        const phone = document.getElementById('phoneInput').value;
+
+        try {
+            const response = await fetch('/login-and-play', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, phone }),
+            });
+
+            if (response.ok) {
+                // Success
+                alert('Welcome! Redirecting to play quiz.');
+                window.location.href = '/play-quiz'; // Redirect to the play quiz page
+            } else {
+                // Handle error
+                alert('Failed to login. Please try again.');
+                console.error('Failed to login');
+            }
+        } catch (error) {
+            // Handle network error
+            alert('An error occurred during the login process. Please try again.');
+            console.error('Error during AJAX request:', error);
+        }
+    }
+  
+      function closeModal() {
+          document.getElementById('setQuestionModal').style.display = 'none';
+      }
+  </script>
+  
+</body>
+
+</html>

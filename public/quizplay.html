@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Quiz Play</title>
+    <style>
+       body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.card {
+    max-width: 400px; /* Adjust the width as needed for a phone display-like design */
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff; /* Add a white background color */
+}
+
+.header {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.question {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.options {
+    list-style: none;
+    padding: 0;
+}
+
+.option-button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.option-button.correct {
+    background-color: #28a745;
+}
+
+.option-button.incorrect {
+    background-color: #dc3545;
+}
+
+.option-button:hover {
+    background-color: #0056b3;
+}
+
+.correct-answer {
+    font-size: 1em;
+    margin-top: 15px;
+    color: #28a745;
+    font-weight: bold;
+    text-align: center;
+}
+
+.incorrect-answer {
+    font-size: 1em;
+    margin-top: 15px;
+    color: #dc3545;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.play-again-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.play-again-btn:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <!-- Inside the <div class="card"> -->
+            <div class="header">Quiz</div>
+            <div class="question" id="question">Loading Question...</div>
+            <!-- Rest of your HTML -->
+
+        <ul class="options" id="options">
+            <!-- Options will be added dynamically using JavaScript -->
+        </ul>
+
+        <div class="correct-answer" id="correctAnswer"></div>
+        <div class="timer">Time Left: <span id="time-left"></span></div>
+        <div class="score">Score: <span id="user-score">0</span></div>
+    </div>
+
+    <!-- Add this modal at the end of the body tag -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p id="modalText">Your total score is: <span id="modal-score">0</span></p>
+            <button class="play-again-btn" id="play-again-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="quizplay.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        // Add an event listener for the "Play Again" button
+        document.getElementById('play-again-btn').addEventListener('click', function () {
+            // Close the modal
+            document.getElementById('myModal').style.display = 'none';
+            
+            // Play again
+            playAgain();
+        });
+    </script>
+</body>
+
+</html>
